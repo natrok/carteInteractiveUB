@@ -1,0 +1,15 @@
+{
+  "talence": {
+    "maxLat": 44.8150,
+    "maxLng": -0.5781,
+    "minLat": 44.7862,
+    "minLng": -0.6272
+  },
+
+  "carreire": {
+    "maxLat": 44.82704,
+    "maxLng": -0.60296,
+    "minLat": 44.82284,
+    "minLng": -0.61197
+  }
+}

@@ -1,0 +1,109 @@
+{
+  "filters" : {
+    "information" : {
+      "fr" : "Information",
+      "en" : "Information",
+      "es": "Información"
+    },
+
+    "forbidden" : {
+      "fr" : "Accès restreint",
+      "en" : "Restricted access",
+      "es": "Acceso limitado"
+    },
+
+    "disabled" : {
+      "fr" : "Handicap",
+      "en" : "Disabled",
+      "es": "Minusvalía"
+    }
+  },
+
+  "search" :{
+    "placeholder" : {
+      "fr" : "Recherche...",
+      "en" : "Search...",
+      "es": "Buscar..."
+    },
+
+    "error" : {
+      "fr" : "Rien n'a été trouvé.",
+      "en" : "Nothing found",
+      "es": "No se encontró nada"
+    },
+
+    "geolocation" : {
+      "fr" : "Votre position",
+      "en" : "Your position",
+      "es": "Su posición"
+    }
+  },
+
+  "error": {
+    "geolocationUnavailable": {
+      "fr": "Géolocalisation non disponible",
+      "en": "Geolocation not available",
+      "es": "Geolocalización no disponible"
+    },
+
+    "geolocationOob": {
+      "fr": "Géolocalisation hors limites",
+      "en": "Geolocalisation out of bounds",
+      "es": "Geolocalización fuera de los límites"
+    },
+
+    "geolocationDenied": {
+      "fr": "Permission de géolocalisation non accordée",
+      "en": "geolocation permission denied",
+      "es": "Permiso de geolocalización no acordada"
+    },
+
+    "geolocationTimeout": {
+      "fr": "La requête de géolocalisation a expiré",
+      "en": "The geolocation request has expired",
+      "es": "La solicitud de geolocalización ha expirado"
+    },
+
+    "geolocationUnknown": {
+      "fr": "Une erreur inconnue s'est produite",
+      "en": "An unknown error occurred",
+      "es": "Se produjo un error desconocido"
+    },
+
+    "dataCampusInvalid": {
+      "fr": "Campus invalide",
+      "en": "Invalid campus",
+      "es": "Campus inválido"
+    },
+
+    "dataCategoryInvalid": {
+      "fr": "Catégorie invalide",
+      "en": "Invalid Category",
+      "es": "La categoría inválido"
+    },
+
+    "dataCoordinatesInvalid": {
+      "fr": "Coordonnées invalides",
+      "en": "Invalid coordinates",
+      "es": "Posición inválida"
+    },
+
+    "dataInformationInvalid": {
+      "fr": "Informations invalides",
+      "en": "Invalid information",
+      "es": "Información inválida"
+    },
+
+    "dataTimelimitInvalid": {
+      "fr": "Durée de vie invalide",
+      "en": "Invalid time limit",
+      "es": "Tiempo límite inválido"
+    },
+
+    "loadDataError": {
+      "fr": "Impossible de charger les données requises",
+      "en": "Unable to load required data",
+      "es": "No se puede cargar los datos necesarios"
+    }
+  }
+}

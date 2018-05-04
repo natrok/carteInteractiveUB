@@ -1,0 +1,19 @@
+{
+  "talence": {
+    "A29": {
+      "lat" : 44.80801,
+      "lng" : -0.59690,
+      "category" : "building",
+      "information" : "Ascenseur: Non présent <br /> Rampe d'accès : Présent"
+    }
+  },
+
+  "carreire": {
+    "Neurocampus": {
+      "lat" : 44.82482,
+      "lng" : -0.60765,
+      "category" : "building",
+      "information" : "Informations sur le Neurocampus"
+    }
+  }
+}

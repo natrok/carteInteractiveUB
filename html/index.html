@@ -1,0 +1,182 @@
+<!--
+ Copyright (C) 2018
+ Anne Gning (gningannemarie@gmail.com), 
+ Diego Alexander Ramírez Buitrago (diegorok3@yahoo.es),
+ Lydia Zekrini (lydia.zekrini@yahoo.fr),
+ Shervin Sarain (velezsarain@gmail.com)
+  
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU Lesser General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU Lesser General Public License for more details.
+
+ You should have received a copy of the GNU Lesser General Public License
+ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+ Please send any update at gningannemarie@gmail.com and/or diegorok3@yahoo.es 
+ and/or lydia.zekrini@yahoo.fr and/or velezsarain@gmail.com
+-->
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title data-localize="title">Carte Interactive Université de Bordeaux</title>
+    <!--Import Google Icon Font-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="css/materialize.css" media="screen"/>
+    <!--Import leaflet.css-->
+    <link type="text/css" rel="stylesheet" href="css/leaflet.css"/>
+    <!--Import MapKeyIcons.css-->
+    <link type="text/css" rel="stylesheet" href="css/MapkeyIcons.css"/>
+    <!--Import Easy-Button.css-->
+    <link type="text/css" rel="stylesheet" href="css/easy-button.css"/>
+    <!--Import Control.Geocoder.css-->
+    <link type="text/css" rel="stylesheet" href="css/Control.Geocoder.css"/>
+    <!--Import leaflet-routing-machine.css-->
+    <link type="text/css" rel="stylesheet" href="js/lib/leaflet-routing/leaflet-routing-machine.css"/>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+
+<body>
+<nav class="nav-extended">
+    <div class="nav-wrapper grey lighten-4">
+        <div class="container">
+            <a href="#" class="brand-logo right">
+                <img class="responsive-img" style="height: 46px"
+                     src="images/logo_fr.svg" alt="logo université">
+            </a>
+            <ul id="nav-mobile" class="left">
+                <li><a href="#help-modal" class="black-text" data-localize="help">Aide</a></li>
+                <li><a class="dropdown-button black-text" href="#" data-activates="languageDropdown"
+                       data-localize="language">Langue</a></li>
+                <li><a class="dropdown-button black-text" href="#" data-activates="campusDropdown"
+                       data-localize="campus">Campus</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Language Dropdown -->
+<ul id="languageDropdown" class="dropdown-content">
+    <li><a id="btn-language-fr" href="#" data-localize="french">Français</a></li>
+    <li><a id="btn-language-en" href="#" data-localize="english">Anglais</a></li>
+    <li><a id="btn-language-es" href="#" data-localize="spanish">Espagnol</a></li>
+</ul>
+
+<!-- Campus Dropdown -->
+<ul id="campusDropdown" class="dropdown-content">
+    <li><a id="btn-campus-talence" href="#">Talence</a></li>
+    <li><a id="btn-campus-carreire" href="#">Carreire</a></li>
+</ul>
+
+<div class="section container">
+    <div class="browser-default" id="campus-map" style="height:89vh">
+        <div class="fixed-action-btn" style="position: absolute;">
+            <a id="btn-clear-directions"
+               class="btn-floating btn-flat btn-large waves-effect waves-light red scale-transition scale-out">
+                <i class="large material-icons">clear</i>
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Help Modal -->
+<div id="help-modal" class="modal bottom-sheet modal-fixed-footer">
+    <div class="modal-content">
+        <h4 data-localize="help-title">Manuel d'utilisation</h4>
+        <b data-localize="help-map">Navigation</b>
+        <p data-localize="help-map-text">Vous pouvez naviger la carte avec une souris, le clavier, ou votre écran tactile.
+             Pour zoomer / dézoomer, utilisez les boutons + / - ou la molette de la souris.
+            Une barre de recherches en haut à droite du plan vous permet de recherches des rues ou bâtiments dans le campus.</p>
+        <b data-localize="help-geolocation">Géolocalisation</b>
+        <p data-localize="help-geolocation-text">Utilisez le bouton de geolocalisation en dessous des boutons de zoom pour vous géolocaliser dans le campus.</p>
+        <b data-localize="help-directions">Recherche de directions</b>
+        <p data-localize="help-directions-text">Faites un clic droit sur la carte pour placer votre point de départ ou d'arrivée.
+            Un menu de recherche de directions s'ouvre. Vous pouvez utiliser ce menu pour modifier vos points de départ ou d'arrivée ou pour ajouter des étapes.
+            Appuyez sur le bouton rouge en bas à gauche pour fermer le menu de recherche de directions.</p>
+        <b data-localize="help-marker">Ajout de marqueurs</b>
+        <p data-localize="help-marker-text">Faites un clic droit sur la carte pour sélectionner un endroit. Appuyez sur "ajouter un marqueur" pour ouvrir un formulaire.
+            Remplissez le formulaire avec le type de marqueur, sa durée de vie, et un texte descriptif.</p>
+        <b data-localize="help-filter">Filtrer les marqueurs</b>
+        <p data-localize="help-filter-text">Un bouton en bas à gauche du plan vous permet de filtrer les marqueurs affichés par type de marqueur.</p>
+    </div>
+    <div class="modal-footer">
+        <button class="modal-action modal-close waves-effect waves-light btn-flat" data-localize="close">Fermer</button>
+    </div>
+</div>
+
+<div id="map-context-menu" class="collection row" style='display:none'>
+    <a id="btn-directions-origin" class="collection-item green-text">
+        <i class="material-icons left"><b>directions</b></i><b data-localize="directions-origin">Départ</b></a>
+    <a id="btn-directions-destination" class="collection-item red-text">
+        <i class="material-icons left"><b>directions</b></i><b data-localize="directions-destination">Arrivée</b></a>
+    <a id="btn-add-marker" class="collection-item black-text" href="#add-pin-modal">
+        <i class="material-icons left"><b>add_location</b></i><b data-localize="add-marker">Ajouter marqueur</b></a>
+</div>
+
+<!-- Add Pin Modal -->
+<div id="add-pin-modal" class="modal">
+    <div class="modal-content">
+        <div class="input-field col s12">
+            <select title="Category" id="add-pin-category" class="icons">
+                <option value="information" selected data-icon="images/mapkeyicons/information.png"
+                        class="left" data-localize="information">Informations</option>
+                <option value="forbidden" data-icon="images/mapkeyicons/forbidden.png"
+                        class="left" data-localize="forbidden">Accès restreint</option>
+                <option value="disabled" data-icon="images/mapkeyicons/disabled.png"
+                        class="left" data-localize="disabled">Handicap</option>
+            </select>
+            <label for="add-pin-category" data-localize="icon-label">Choissisez une icône</label>
+        </div>
+        <div class="col s12">
+
+            <p class="range-field">
+                <label for="add-pin-timelimit" data-localize="time-label">Durée de vie</label>
+                <input title="Timelimit" name="timelimit" type="range" id="add-pin-timelimit" min="1" max="10" value="2" />
+            </p>
+        </div>
+        <div class="input-field col s12">
+            <textarea id="add-pin-information" class="materialize-textarea" maxlength="256"></textarea>
+            <label for="add-pin-information" data-localize="information-label">Informations</label>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button id="btn-cancel-marker" class="modal-action modal-close waves-effect waves-red btn-flat"
+                data-localize="cancel">Annuler</button>
+        <button id="btn-confirm-marker" class="modal-action modal-close waves-effect waves-green btn-flat"
+                data-localize="confirm">Ajouter</button>
+    </div>
+</div>
+
+<!--Import jQuery-->
+<script type="text/javascript" src="js/lib/jquery-3.1.1.js"></script>
+<!--Import materialize.js-->
+<script type="text/javascript" src="js/lib/materialize.js"></script>
+<!--Import leaflet.js-->
+<script type="text/javascript" src="js/lib/leaflet-src.js"></script>
+<!--Import Leaflet.Icon.Glyph.js-->
+<script type="text/javascript" src="js/lib/L.Icon.Mapkey.js"></script>
+<!--Import Easy-Button.js-->
+<script type="text/javascript" src="js/lib/easy-button.js"></script>
+<!--Import Control.Geocoder.js.js-->
+<script type="text/javascript" src="js/lib/Control.Geocoder.js"></script>
+<!--Import leaflet routing machine-->
+<script type="text/javascript" src="js/lib/leaflet-routing/leaflet-routing-machine.js"></script>
+<!--Import jquery-localize-->
+<script type="text/javascript" src="js/lib/jquery.localize.js"></script>
+<!--Import main.js-->
+<script type="text/javascript" src="js/main.js"></script>
+<!--Import map.js-->
+<script type="text/javascript" src="js/map.js"></script>
+<!--Import server.js-->
+<script type="text/javascript" src="js/server.js"></script>
+</body>
+</html>
